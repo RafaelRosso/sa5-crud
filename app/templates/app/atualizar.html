@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+{% block title %} <title>Atualizar</title> {% endblock %}
+{% block content %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Atualizar</h1>
+        
+      </div>
+      <div class="mt-4 mb-4">
+        <form action="{% url 'atualizar' dados.id %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="nome" value="{{dados.nome}}" placeholder="Nome completo" />
+            <input type="date" name="nascimento" value="{{dados.nascimento|date:'Y-m-d'}}" placeholder="00/00/000" />
+            <input type="email" name="email" value="{{dados.email}}" placeholder="example@example.com" />
+            <input type="text" name="pais" value="{{dados.pais}}" placeholder="País que deseja trabalar" />
+            <button type="submit">Salvar</button>
+        </form>
+        
+      </div>
+
+    </main>
+{% endblock %}
+ 
