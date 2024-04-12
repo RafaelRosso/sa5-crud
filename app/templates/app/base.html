@@ -102,6 +102,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{% static 'css/dashboard.css'%}" rel="stylesheet">
+    <link href="{% static 'css/mod.css'%}" rel="stylesheet">
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -244,25 +245,25 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'criar'%}">
                 <i class="bi bi-plus-circle"></i>
                 Criar
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'pesquisar'%}">
                 <i class="bi bi-search"></i>
                 Pesquisar
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="/atualizar">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'atualizar'%}">
                 <i class="bi bi-arrow-repeat"></i>
                 Atualizar
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'deletar'%}">
                 <i class="bi bi-trash"></i>
                 Deletar
               </a>

@@ -1,0 +1,84 @@
+{% extends 'app/base.html' %}
+{% block title %} <title>Deletar</title> {% endblock %}
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Deletar</h1>
+  </div>
+  {% include "app/search.html" with url_search="deletar" %}
+  <div class="table-responsive small">
+    {% if dados %}
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Data de Nascimento</th>
+          <th scope="col">Email</th>
+          <th scope="col">Pais</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody id="recordList">
+        {% for row in dados %}
+        <tr>
+          <td>{{row.id}}</td>
+          <td>{{row.nome}}</td>
+          <td>{{row.nascimento}}</td>
+          <td>{{row.email}}</td>
+          <td>{{row.pais}}</td>
+          <td>
+            <a class="btn btn-outline-danger deleteButton" href="{% url 'deletar_id' row.id %}" data-id="{{row.id}}"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {%else%}
+    <h1 class="h5 text-center">Nenhum registro encontrado!</h1>
+    {% endif %}
+  </div>
+</main>
+
+<!-- Modal de Confirmação -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+        
+      </div>
+      <div class="modal-body">
+        Tem certeza de que deseja excluir este registro?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger" id="confirmDeleteButton">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Capturar evento de clique no botão de exclusão
+    var deleteButtons = document.querySelectorAll(".deleteButton");
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        var deleteUrl = this.getAttribute("href");
+        var recordId = this.getAttribute("data-id");
+        // Mostrar a modal de confirmação
+        var confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'), {});
+        confirmDeleteModal.show();
+        // Se o botão de confirmação for clicado, redirecionar para a URL de exclusão
+        document.getElementById("confirmDeleteButton").addEventListener("click", function () {
+          window.location.href = deleteUrl;
+        });
+      });
+    });
+  });
+</script>
+
+
+{% endblock %}

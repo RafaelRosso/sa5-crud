@@ -1,25 +1,39 @@
 {% extends 'app/base.html' %}
-
 {% block title %} <title>Atualizar</title> {% endblock %}
 {% block content %}
-
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Atualizar</h1>
-        
       </div>
       <div class="mt-4 mb-4">
-        <form action="{% url 'atualizar' dados.id %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="nome" value="{{dados.nome}}" placeholder="Nome completo" />
-            <input type="date" name="nascimento" value="{{dados.nascimento|date:'Y-m-d'}}" placeholder="00/00/000" />
-            <input type="email" name="email" value="{{dados.email}}" placeholder="example@example.com" />
-            <input type="text" name="pais" value="{{dados.pais}}" placeholder="País que deseja trabalar" />
-            <button type="submit">Salvar</button>
-        </form>
         
-      </div>
+        <form id="myForm" action="{% url 'atualizar_id' dados.id %}" method="post">
+          {% csrf_token %}
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <div class="input-group mb-3">
+                <span class="input-group-text"><i class="bi bi-person-plus"></i></button></span>
+                <input type="text" required name="nome" value="{{dados.nome}}" class="form-control" placeholder="Nome completo" size="50">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text"><i class="bi bi-calendar2-date"></i></button></span>
+                <span class="input-group-text">Data de Nascimento</span>
+                <input type="date" class="form-control" value="{{dados.nascimento|date:'Y-m-d'}}" required name="nascimento" placeholder="00/00/000" size="50">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text"><i class="bi bi-envelope"></i></button></span>
+                <input type="email" required name="email" value="{{dados.email}}" class="form-control" placeholder="exemplo@exemplo.com" size="50">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text"><i class="bi bi-globe-americas"></i></button></span>
+                <input type="text" required name="pais" value="{{dados.pais}}" class="form-control" placeholder="País que deseja trabalhar?"
+                  size="50" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Atualizar</button>
+              </div>
+            </div>
+          </div>
+        </form>
 
+      </div>
     </main>
 {% endblock %}
- 
